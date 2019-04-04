@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+
+<head>
+    <title>Roditelj Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <p>Dobrodosao Ucitelju(<span sec:authentication="principal.username">Ucitelj</span>)</p>
+    <h1>Ovo je Uciteljski home page</h1>
+    <div>
+        <p>Prikaz ucenika po JMBG-u</p>
+        <form id="f1" action="/admin/pronadji_ucenika_po_jmbg-u">
+            JMBG: <input type="text" name="jmbg"><br><br>
+            <input type="button" onclick="function1()" value="Pronadji">
+        </form>
+        <br><br><p>Prikaz ucenika po prezimenu</p>
+        <form id="f2" action="/admin/pronadji_ucenika_po_prezimenu">
+            Prezime: <input type="text" name="prezime"><br><br>
+            <input type="button" onclick="function2()" value="Pronadji">
+        </form>
+        <br><br><p>Unos ocene</p>
+        <form id="f3" action="/admin/unesi_ocenu">
+            Id ucenika: <input type="text" name="id_ucenika"><br>
+            Id predmeta: <input type="text" name="id_predmeta"><br>
+            Ocena: <input type="text" name="ocena"><br>
+            <input type="button" onclick="function3()" value="Sacuvaj">
+        </form>
+        <br><br><p>Prikaz ocena po uceniku</p>
+        <form id="f4" action="/admin/ocene_po_uceniku">
+            Id ucenika: <input type="text" name="id_ucenika"><br><br>
+            <input type="button" onclick="function4()" value="Pronadji">
+        </form>
+        <br><br><p>Prikaz ocena po predmetu</p>
+        <form id="f5" action="/admin/ocene_po_predmetu">
+            Id predmeta: <input type="text" name="id_predmeta"><br><br>
+            <input type="button" onclick="function5()" value="Pronadji">
+        </form>
+        <br><br><p>Prikaz rasporeda po danu, vremenu i odeljenju</p>
+        <form id="f6" action="/admin/raspored_po_danu_vremenu_i_odeljenju">
+            Dan u nedelji: <input type="text" name="dan_u_nedelji"><br>
+            Vreme: <input type="text" name="vreme"><br>
+            Id odeljenja:<input type="text" name="id_odeljenja"><br><br>
+            <input type="button" onclick="function6()" value="Prikazi">
+        </form>
+
+        <script>
+            function function1(){
+            document.getElementById("f1").submit();
+            }
+        </script>
+        <script>
+            function function2(){
+            document.getElementById("f2").submit();
+            }
+        </script>
+        <script>
+            function function3(){
+            document.getElementById("f3").submit();
+            }
+        </script>
+        <script>
+            function function4(){
+            document.getElementById("f4").submit();
+            }
+        </script>
+        <script>
+            function function5(){
+            document.getElementById("f5").submit();
+            }
+        </script>
+        <script>
+            function function6(){
+            document.getElementById("f6").submit();
+            }
+        </script>
+    </div>
+
+    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+
+<head>
+    <title>Admin Home</title>
+</head>
+<body>
+<h1>Ovo je admin home page</h1><br><br>
+<div layout:fragment="content">
+    <p>Dobrodosao Administratore(<span sec:authentication="principal.username">Admin</span>)</p>
+    <div>
+        <p>Unos novog korisnika</p>
+        <form id="f1" action="/admin/dodaj_korisnika">
+            Ime: <input type="text" name="ime"><br>
+            Prezime: <input type="text" name="prezime"><br>
+            Username: <input type="text" name="username"><br>
+            Password: <input type="text" name="password"><br><br>
+            <input type="button" onclick="function1()" value="Sacuvaj">
+        </form>
+        <br><br><p>Svi korisnici</p>
+        <form id="f2" action="/admin/svi_korisnici">
+            <input type="button" onclick="function2()" value="Prikazi">
+        </form>
+        <br><br><p>Brisanje korisnika</p>
+        <form id="f3" action="/admin/obrisi_korisnika">
+            Id: <input type="text" name="id"><br><br>
+            <input type="button" onclick="function3()" value="Obrisi">
+        </form>
+        <br><br><p>Pronadji korisnika</p>
+        <form id="f4" action="/admin/pronadji_korisnika_po_id-u">
+            Id: <input type="text" name="id"><br><br>
+            <input type="button" onclick="function4()" value="Pronadji">
+        </form>
+        <br><br><p>Korisnik po ID-ju</p>
+        <form id="f5" action="/admin/pronadji_korisnika_po_korisnickom_imenu">
+            Id: <input type="text" name="username"><br><br>
+            <input type="button" onclick="function5()" value="Pronadji">
+        </form>
+        <br><br><p>Izmeni podatke korisnika</p>
+        <form id="f6" action="/admin/izmeni_korisnika">
+            Id: <input type="text" name="id"><br>
+            Ime: <input type="text" name="ime"><br>
+            Prezime: <input type="text" name="prezime"><br>
+            Username: <input type="text" name="username"><br>
+            Password: <input type="text" name="password"><br><br>
+            <input type="button" onclick="function6()" value="Sacuvaj">
+        </form>
+        <br><br><p>Unos novog ucenika</p>
+        <form id="f7" action="/admin/dodaj_ucenika">
+            Ime: <input type="text" name="ime"><br>
+            Prezime: <input type="text" name="prezime"><br>
+            Username: <input type="text" name="jmbg"><br>
+            Password: <input type="text" name="izostanci"><br><br>
+            <input type="button" onclick="function7()" value="Sacuvaj">
+        </form>
+        <br><br><p>Svi ucenici</p>
+        <form id="f8" action="/admin/svi_ucenici">
+            <input type="button" onclick="function8()" value="Prikazi">
+        </form>
+        <br><br><p>Brisanje ucenika</p>
+        <form id="f9" action="/admin/obrisi_ucenika">
+            Id: <input type="text" name="id"><br><br>
+            <input type="button" onclick="function9()" value="Obrisi">
+        </form>
+        <br><br><p>Ucenik po ID-ju</p>
+        <form id="f10" action="/admin/pronadji_ucenika_po_id-u">
+            Id: <input type="text" name="id"><br><br>
+            <input type="button" onclick="function10()" value="Pronadji">
+        </form>
+        <br><br><p>Izmena podataka ucenika</p>
+        <form id="f11" action="/admin/izmeni_ucenika">
+            Id: <input type="text" name="id"><br>
+            Ime: <input type="text" name="ime"><br>
+            Prezime: <input type="text" name="prezime"><br>
+            Username: <input type="text" name="jmbg"><br>
+            Password: <input type="text" name="izostanci"><br><br>
+            <input type="button" onclick="function11()" value="Sacuvaj">
+        </form>
+        <br><br><p>Ucenik po JMBG-u</p>
+        <form id="f12" action="/admin/pronadji_ucenika_po_jmbg-u">
+            Id: <input type="text" name="jmbg"><br><br>
+            <input type="button" onclick="function12()" value="Pronadji">
+        </form>
+        <br><br><p>Ucenik po prezimenu</p>
+        <form id="f13" action="/admin/pronadji_ucenika_po_prezimenu">
+            Id: <input type="text" name="prezime"><br><br>
+            <input type="button" onclick="function12()" value="Pronadji">
+        </form>
+        <br><br><p>Unos ocene</p>
+        <form id="f14" action="/admin/unesi_ocenu">
+            Id ucenika: <input type="text" name="id_ucenika"><br>
+            Id predmeta: <input type="text" name="id_predmeta"><br>
+            Ocena: <input type="text" name="ocena"><br>
+            <input type="button" onclick="function14()" value="Sacuvaj">
+        </form>
+        <br><br><p>Prikaz ocena po uceniku</p>
+        <form id="f15" action="/admin/ocene_po_uceniku">
+            Id ucenika: <input type="text" name="id_ucenika"><br><br>
+            <input type="button" onclick="function15()" value="Pronadji">
+        </form>
+        <br><br><p>Prikaz ocena po predmetu</p>
+        <form id="f16" action="/admin/ocene_po_predmetu">
+            Id predmeta: <input type="text" name="id_predmeta"><br><br>
+            <input type="button" onclick="function16()" value="Pronadji">
+        </form>
+        <br><br><p>Unos u raspored</p>
+        <form id="f17" action="/admin/unesi_u_raspored">
+            Dan u nedelji: <input type="text" name="dan_u_nedelji"><br>
+            Vreme: <input type="text" name="vreme"><br>
+            ID predmeta: <input type="text" name="id_predmeta"><br>
+            ID odeljenja: <input type="text" name="id_odeljenja"><br>
+            <input type="button" onclick="function17()" value="Sacuvaj">
+        </form>
+        <br><br><p>Promena rasporeda</p>
+        <form id="f18" action="/admin/promeni_raspored">
+            Id: <input type="text" name="id"><br>
+            Dan u nedelji: <input type="text" name="dan_u_nedelji"><br>
+            Vreme: <input type="text" name="vreme"><br>
+            ID predmeta: <input type="text" name="id_predmeta"><br>
+            ID odeljenja: <input type="text" name="id_odeljenja"><br><br>
+            <input type="button" onclick="function18()" value="Sacuvaj">
+        </form>
+        <br><br><p>Prikaz rasporeda po danu</p>
+        <form id="f19" action="/admin/raspored_po_danu">
+            Dan u nedelji: <input type="text" name="dan_u_nedelji"><br><br>
+            <input type="button" onclick="function19()" value="Prikazi">
+        </form>
+        <br><br><p>Prikaz rasporeda po danu i vremenu</p>
+        <form id="f20" action="/admin/raspored_po_danu_i_vremenu">
+            Dan u nedelji: <input type="text" name="dan_u_nedelji"><br>
+            Vreme: <input type="text" name="vreme"><br><br>
+            <input type="button" onclick="function20()" value="Prikazi">
+        </form>
+        <br><br><p>Prikaz rasporeda po danu, vremenu i odeljenju</p>
+        <form id="f21" action="/admin/raspored_po_danu_vremenu_i_odeljenju">
+            Dan u nedelji: <input type="text" name="dan_u_nedelji"><br>
+            Vreme: <input type="text" name="vreme"><br>
+            Id odeljenja:<input type="text" name="id_odeljenja"><br><br>
+            <input type="button" onclick="function21()" value="Prikazi">
+        </form>
+        <br><br><p>Promena predmeta u rasporedu</p>
+        <form id="f22" action="/admin/promeni_predmet_u_rasporedu">
+            ID predmeta: <input type="text" name="id_predmeta"><br>
+            Dan u nedelji: <input type="text" name="dan_u_nedelji"><br>
+            Vreme: <input type="text" name="vreme"><br>
+            ID odeljenja: <input type="text" name="id_odeljenja"><br><br>
+            <input type="button" onclick="function22()" value="Sacuvaj">
+        </form>
+        <br><br><p>Unos u odeljenje</p>
+        <form id="f23" action="/admin/unesi_u_odeljenje">
+            Broj odeljenja: <input type="text" name="broj_odeljenja"><br>
+            Id ucitelja: <input type="text" name="id_ucitelja"><br>
+            Id ucenika: <input type="text" name="id_ucenika"><br><br>
+            <input type="button" onclick="function23()" value="Sacuvaj">
+        </form>
+        <br><br><p>Izmena odeljenja</p>
+        <form id="f24" action="/admin/izmeni_odeljenje">
+            Id odeljenja: <input type="text" name="id"><br>
+            Broj odeljenja: <input type="text" name="broj_odeljenja"><br>
+            Id ucitelja: <input type="text" name="id_ucitelja"><br>
+            Id ucenika: <input type="text" name="id_ucenika"><br><br>
+            <input type="button" onclick="function24()" value="Sacuvaj">
+        </form>
+        <br><br><p>Prikaz odeljenja</p>
+        <form id="f25" action="/admin/prikaz_odeljenja">
+            Broj odeljenja: <input type="text" name="broj_odeljenja"><br><br>
+            <input type="button" onclick="function25()" value="Prikazi">
+        </form>
+        <br><br><p>Prikaz odeljenja prema ucitelju</p>
+        <form id="f26" action="/admin/ucitelj_odeljenje">
+            Id ucitelja: <input type="text" name="id_ucitelja"><br><br>
+            <input type="button" onclick="function26()" value="Prikazi">
+        </form>
+        <br><br><p>Prikaz odeljenja prema uceniku</p>
+        <form id="f27" action="/admin/ucitelj_odeljenje">
+            Id ucenika: <input type="text" name="id_ucenika"><br><br>
+            <input type="button" onclick="function27()" value="Prikazi">
+        </form>
+        <br><br><p>Brisanje odeljenja</p>
+        <form id="f28" action="/admin/obrisi_odeljenje">
+            Broj odeljenja: <input type="text" name="broj_odeljenja"><br><br>
+            <input type="button" onclick="function28()" value="Prikazi">
+        </form>
+
+
+
+        <script>
+            function function1(){
+            document.getElementById("f1").submit();
+            }
+        </script>
+        <script>
+            function function2(){
+            document.getElementById("f2").submit();
+            }
+        </script>
+        <script>
+            function function3(){
+            document.getElementById("f3").submit();
+            }
+        </script>
+        <script>
+            function function4(){
+            document.getElementById("f4").submit();
+            }
+        </script>
+        <script>
+            function function5(){
+            document.getElementById("f5").submit();
+            }
+        </script>
+        <script>
+            function function6(){
+            document.getElementById("f6").submit();
+            }
+        </script>
+        <script>
+            function function7(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function8(){
+            document.getElementById("f8").submit();
+            }
+        </script>
+        <script>
+            function function9(){
+            document.getElementById("f9").submit();
+            }
+        </script>
+        <script>
+            function function10(){
+            document.getElementById("f10").submit();
+            }
+        </script>
+        <script>
+            function function11(){
+            document.getElementById("f11").submit();
+            }
+        </script>
+        <script>
+            function function12(){
+            document.getElementById("f12").submit();
+            }
+        </script>
+        <script>
+            function function13(){
+            document.getElementById("f13").submit();
+            }
+        </script>
+        <script>
+            function function14(){
+            document.getElementById("f14").submit();
+            }
+        </script>
+        <script>
+            function function15(){
+            document.getElementById("f15").submit();
+            }
+        </script>
+        <script>
+            function function16(){
+            document.getElementById("f16").submit();
+            }
+        </script>
+        <script>
+            function function17(){
+            document.getElementById("f17").submit();
+            }
+        </script>
+        <script>
+            function function18(){
+            document.getElementById("f18").submit();
+            }
+        </script>
+        <script>
+            function function19(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function20(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function21(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function22(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function23(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function24(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function25(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function26(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function27(){
+            document.getElementById("f7").submit();
+            }
+        </script>
+        <script>
+            function function28(){
+            document.getElementById("f28").submit();
+            }
+        </script>
+
+    </div>
+
+    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+</div>
+
+</body>
+
+</html>

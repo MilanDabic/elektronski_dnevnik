@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+
+<head>
+    <title>Roditelj Home</title>
+</head>
+<body>
+<h1>Ovo je Roditeljski home page</h1><br><br>
+<div layout:fragment="content">
+    <p>Dobrodosao Roditelju(<span sec:authentication="principal.username">Roditelj</span>)</p>
+    <div>
+        <br><br><p>Prikaz ucenika</p>
+        <form id="f2" action="/roditelj/pronadji_ucenika">
+            <input type="button" onclick="function2()" value="Prikazi">
+        </form>
+        <script>
+            function function2(){
+            document.getElementById("f2").submit();
+            }
+        </script>
+    </div>
+
+    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+</div>
+
+</body>
+
+</html>

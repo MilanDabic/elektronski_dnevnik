@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+
+<head>
+    <title>Roditelj Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <p>Dobrodosao Direktore(<span sec:authentication="principal.username">Direktor</span>)</p>
+
+    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+</div>
+<h1>Ovo je Direktorski home page</h1>
+</body>
+
+</html>
